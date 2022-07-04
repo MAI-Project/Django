@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'torrentCinema'
 ]
 
 MIDDLEWARE = [
@@ -79,6 +81,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'cinemaDB',
+#         'USER': 'admin',
+#         'PASSWORD': 'root',
+#         'HOST': '0.0.0.0',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation

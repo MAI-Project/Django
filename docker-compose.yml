@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "cinemaDB"
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "root"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - ./vol:/var/lib/postgresql/data
+    ports:
+      - "5000:5432"
+  # web:
+  #   build: .\web\
+  #   command: python manage.py runserver 0.0.0.0:8000
+  #   volumes:
+  #     - .:/code
+  #   ports:
+  #     - "8000:8000"
