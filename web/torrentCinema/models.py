@@ -18,12 +18,14 @@ class Category(models.Model):
 
 class Film(models.Model):
     """Модель конкретного фильма"""
-    
+
     name = models.CharField(max_length=255, verbose_name='Название')
     description = models.TextField(verbose_name='Описание')
     releaseDate = models.DateField(verbose_name='Дата Публикации')
     rating = models.IntegerField(verbose_name='Рэйтинг')
+    from_torrent = models.BooleanField(verbose_name='Загрузка с торрента', default=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, verbose_name='Категория')
+    #TODO: добавить поле магнет ссылки и пути до файла
 
     def __str__(self):
         return self.name
