@@ -4,7 +4,7 @@ from unicodedata import category
 from django.db import models
 
 class Category(models.Model):
-    """ Модель категории фильма, связаннвя с фильмами"""
+    """ Модель категории фильма, связанная с фильмами"""
 
     name = models.CharField(max_length=255,verbose_name='Название')
 

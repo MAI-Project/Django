@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Film, Category
 from django.http import HttpResponse
 # Create your views here.
 
@@ -8,7 +9,9 @@ def index(request):
 
 
 def comedy(request):
-    return render(request, 'main/comedy.html')
+    c = Category.objects.get(name='comedy')
+    film_list = c.film_set.all()
+    return render(request, 'main/comedy.html', {'title': 'Comedy', 'films': film_list})
 
 
 def drama(request):
@@ -27,7 +30,8 @@ def action(request):
     return render(request, 'main/action.html')
 
 
-def player(request):
-    return render(request, 'main/player.html')
+def player(request, filmId):
+    film = Film.objects.get(pk=filmId)
+    return render(request, 'main/player.html', {'film': film})
 
 
