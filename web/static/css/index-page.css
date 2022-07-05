@@ -1,0 +1,29 @@
+* {
+  box-sizing: border-box;
+}
+
+.carousel {
+  width: 100%;
+}
+
+.carousel-item img {
+  height: 660px; /* высота изображения */
+  object-fit: fill;
+}
+
+#description {
+  color: #bb6829;
+
+}
+footer {
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    color: #bb6829;
+}
+#navigation {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 10000;
+}

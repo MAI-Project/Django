@@ -1,9 +1,12 @@
-from django.contrib import admin
-from django.urls import path, include
-
+from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name="articles")
+    path('', views.index, name='home'),
+    path('comedy', views.comedy, name='comedy'),
+    path('drama', views.drama, name='drama'),
+    path('romance', views.romance, name='romance'),
+    path('detective', views.detective, name='detective'),
+    path('action', views.action, name='action'),
+    path('player', views.player, name='player')
 ]
-
