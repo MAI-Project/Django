@@ -2,6 +2,7 @@ from pyexpat import model
 from tabnanny import verbose
 from unicodedata import category
 from django.db import models
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     """ Модель категории фильма, связаннвя с фильмами"""
@@ -22,7 +23,7 @@ class Film(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название')
     description = models.TextField(verbose_name='Описание')
     releaseDate = models.DateField(null=True, verbose_name='Дата Публикации')
-    rating = models.IntegerField( null=True, verbose_name='Рэйтинг')
+    rating = models.IntegerField( null=True, verbose_name='Рейтинг')
     from_torrent = models.BooleanField(null=True, default=True, verbose_name='Загрузка с торрента')
     imagePath = models.TextField(null=True, verbose_name='Путь до постера')
     magnet = models.TextField(null=True, verbose_name='Магнет ссылка')
@@ -36,5 +37,15 @@ class Film(models.Model):
         verbose_name = 'Фильм'
         verbose_name_plural = 'Фильмы'
 
+class Сomment(models.Model):
+    owner = models.ForeignKey(User, null=True, on_delete=models.CASCADE, verbose_name='Ссылка на автора')
+    film  = models.ForeignKey(Film, null=True, on_delete=models.CASCADE, verbose_name='Ссылка на фильм')
+    body = models.TextField(verbose_name='Тело комментария')
+    
+    def __str__(self):
+        return (self.owner + self.film)
 
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
         
