@@ -21,9 +21,9 @@ class Film(models.Model):
 
     name = models.CharField(max_length=255, verbose_name='Название')
     description = models.TextField(verbose_name='Описание')
-    releaseDate = models.DateField(verbose_name='Дата Публикации')
-    rating = models.IntegerField(verbose_name='Рэйтинг')
-    from_torrent = models.BooleanField(verbose_name='Загрузка с торрента', default=True)
+    releaseDate = models.DateField(null=True, verbose_name='Дата Публикации')
+    rating = models.IntegerField(verbose_name='Рэйтинг', null=True)
+    from_torrent = models.BooleanField(verbose_name='Загрузка с торрента', null=True, default=True)
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, verbose_name='Категория')
     #TODO: добавить поле магнет ссылки и пути до файла
 
