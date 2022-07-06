@@ -51,22 +51,27 @@
             </div>
         </div>
     </section>
+
      <div class="myVideo" id="video">
         <!-- Include WebTorrent -->
     <script src="https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js"></script>
 
     <!-- Torrent streaming -->
     <script>
-        function log (str) {
-            const p = document.createElement('p')
-            p.innerHTML = str
-            document.querySelector('.log').appendChild(p)
+        magnet = ""
+        torrentId = "{{ film.magnet }}"
+        for (var i = 0; i < torrentId.length; i++){
+            if(torrentId[i] != '&'){
+                magnet += torrentId[i]
+            }
+            else {
+                magnet += '&'
+                i+=4
+            }
         }
-        torrentId = "{{film.magnet}}"
-        // log(torrentId)
-        log('<p>' + torrentId + '</p>')
+
         const client = new WebTorrent()
-        client.add(torrentId, onTorrent)
+        client.add(magnet, onTorrent)
 
         // Render media files into to the page
         function onTorrent (torrent) {

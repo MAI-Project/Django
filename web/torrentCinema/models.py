@@ -25,7 +25,7 @@ class Film(models.Model):
     rating = models.IntegerField( null=True, verbose_name='Рэйтинг')
     from_torrent = models.BooleanField(null=True, default=True, verbose_name='Загрузка с торрента')
     imagePath = models.TextField(null=True, verbose_name='Путь до постера')
-    magnet = models.TextField(null=True, verbose_name='Магнет ссылка')
+    magnet = models.TextField(max_length=1024, null=True, verbose_name='Магнет ссылка')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, verbose_name='Категория')
     #TODO: добавить поле магнет ссылки и пути до файла
 

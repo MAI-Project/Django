@@ -23,7 +23,9 @@ def romance(request):
 
 
 def detective(request):
-    return render(request, 'main/detective.html')
+    c = Category.objects.get(name='detective')
+    film_list = c.film_set.all()
+    return render(request, 'main/detective.html', {'title': 'Detective', 'films': film_list})
 
 
 def action(request):
