@@ -15,11 +15,15 @@ def comedy(request):
 
 
 def drama(request):
-    return render(request, 'main/drama.html')
+    c = Category.objects.get(name='drama')
+    film_list = c.film_set.all()
+    return render(request, 'main/drama.html', {'title': 'Drama', 'films': film_list})
 
 
 def romance(request):
-    return render(request, 'main/romance.html')
+    c = Category.objects.get(name='romance')
+    film_list = c.film_set.all()
+    return render(request, 'main/romance.html', {'title': 'Romance', 'films': film_list})
 
 
 def detective(request):
@@ -29,7 +33,9 @@ def detective(request):
 
 
 def action(request):
-    return render(request, 'main/action.html')
+    c = Category.objects.get(name='action')
+    film_list = c.film_set.all()
+    return render(request, 'main/action.html', {'title': 'Action', 'films': film_list})
 
 
 def player(request, filmId):
