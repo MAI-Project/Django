@@ -1,7 +1,6 @@
 * {
   box-sizing: border-box;
 }
-
 .carousel {
   width: 100%;
 }
@@ -24,6 +23,7 @@ footer {
 #navigation {
   position: sticky;
   top: 0;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   z-index: 10000;
+  border-radius: 0 0 20px 20px;
 }

@@ -16,6 +16,37 @@
 
             text-decoration: underline;
         }
+        body
+        {
+            /* float: left; */
+            overflow-y: scroll;
+        }
+
+        body::-webkit-scrollbar-track
+        {
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+            border-radius: 4px;
+            background-color: #F5F5F5;
+        }
+
+        body::-webkit-scrollbar
+        {
+            width: 8px;
+            background-color: #F5F5F5;
+        }
+
+        body::-webkit-scrollbar-thumb
+        {
+            /* Цвет пальзунка */
+            background-color: rgb(151, 151, 151);
+            
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+        }
+        .myclass
+        {
+            background-color: white;
+        }
     </style>
     <title>Главная</title>
 </head>
@@ -26,6 +57,7 @@
     <!-- Header -->
     <!-- Header -->
     <div id="navigation" class="container header">
+    <!-- <div id="navigation" class="header nav"> -->
         <header class="d-flex flex-wrap justify-content-center py-3 border-bottom">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
 
