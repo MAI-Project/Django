@@ -14,12 +14,15 @@
   color: #bb6829;
 
 }
-footer {
-    display: flex;
-    justify-content: center;
-    padding: 5px;
-    color: #bb6829;
-}
+.footer-nongrad {
+     width: 100%;
+     padding-bottom: 25px;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     padding: 5px;
+     color: #bb6829;
+ }
 #navigation {
   position: sticky;
   top: 0;
@@ -27,3 +30,4 @@ footer {
   z-index: 10000;
   border-radius: 0 0 10px 10px;
 }
+

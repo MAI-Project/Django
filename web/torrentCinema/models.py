@@ -7,6 +7,7 @@ class Category(models.Model):
     """ Модель категории фильма, связанная с фильмами"""
 
     name = models.CharField(max_length=255,verbose_name='Название')
+    maincategory = models.BooleanField(default=True, verbose_name='Главная категория')
 
     def __str__(self):
         return self.name
@@ -22,7 +23,7 @@ class Film(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название')
     description = models.TextField(verbose_name='Описание')
     releaseDate = models.DateField(null=True, verbose_name='Дата Публикации')
-    rating = models.IntegerField( null=True, verbose_name='Рэйтинг')
+    rating = models.IntegerField( null=True, verbose_name='Рейтинг')
     from_torrent = models.BooleanField(null=True, default=True, verbose_name='Загрузка с торрента')
     imagePath = models.TextField(null=True, verbose_name='Путь до постера')
     magnet = models.TextField(max_length=1024, null=True, verbose_name='Магнет ссылка')
