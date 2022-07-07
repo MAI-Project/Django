@@ -11,11 +11,16 @@ services:
     volumes:
       - ./vol:/var/lib/postgresql/data
     ports:
-      - "5000:5432"
-  # web:
-  #   build: .\web\
-  #   command: python manage.py runserver 0.0.0.0:8000
-  #   volumes:
-  #     - .:/code
-  #   ports:
-  #     - "8000:8000"
+      - "5432:5432"
+    restart: always
+
+  web:
+    build: ./web/
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8080"
+    volumes:
+      - .:/code
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    restart: always

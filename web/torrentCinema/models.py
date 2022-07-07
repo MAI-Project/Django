@@ -1,5 +1,6 @@
 from pyexpat import model
 from tabnanny import verbose
+from threading import local
 from unicodedata import category
 from django.db import models
 
@@ -27,8 +28,8 @@ class Film(models.Model):
     from_torrent = models.BooleanField(null=True, default=True, verbose_name='Загрузка с торрента')
     imagePath = models.TextField(null=True, verbose_name='Путь до постера')
     magnet = models.TextField(max_length=1024, null=True, verbose_name='Магнет ссылка')
+    # localPath = models.CharField(max_length=255, null=True, verbose_name='Локальный Путь')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, verbose_name='Категория')
-    #TODO: добавить поле магнет ссылки и пути до файла
 
     def __str__(self):
         return self.name
