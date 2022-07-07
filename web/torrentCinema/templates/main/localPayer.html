@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block description %}
+{{ film.name }}
+{% endblock %}
+
+{% block content %}
+    <div class="myVideo" id="video">
+    <video width="400" height="300" controls="controls">
+
+    </video>
+    </div>
+    <footer class="footer-nongrad">
+        <p>© 2022 813Enjoyers team
+        </p>
+    </footer>
+{% endblock %}
+
