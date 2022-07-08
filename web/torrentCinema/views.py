@@ -1,7 +1,10 @@
+# from tokenize import Comment
 from django.shortcuts import render
-from .models import Film, Category
+from .models import Film, Category, Сomment
 from django.http import HttpResponse
-# Create your views here.
+
+from django.contrib.auth.models import User
+from django.contrib import auth
 
 
 def index(request):
@@ -17,8 +20,20 @@ def genre(request, tag):
 
 
 def player(request, filmId):
-    p = Category.objects.filter(maincategory=True)
-    film = Film.objects.get(pk=filmId)
-    return render(request, 'main/player.html', {'film': film,"cat_list": p})
 
+    film = Film.objects.get(pk=filmId)
+    isuser = False
+    if request.user.is_authenticated:
+        isuser = True
+        
+    p = Category.objects.filter(maincategory=True)
+    comments = film.commented_film.all()
+
+    if request.method == "POST":
+        _body = request.POST.get('comment')
+        if _body != "":
+            comment = Сomment(owner = request.user, film=film, body=_body)
+            comment.save()
+            
+    return render(request, 'main/player.html', {'film': film,"cat_list": p, 'comments': comments, 'isuser': isuser })
 

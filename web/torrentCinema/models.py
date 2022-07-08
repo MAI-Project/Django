@@ -3,6 +3,7 @@ from tabnanny import verbose
 from threading import local
 from unicodedata import category
 from django.db import models
+from django.contrib.auth.models import User
 
 class Category(models.Model):
     """ Модель категории фильма, связанная с фильмами"""
@@ -39,4 +40,15 @@ class Film(models.Model):
         verbose_name_plural = 'Фильмы'
 
 
-        
+class Сomment(models.Model):
+    owner = models.ForeignKey(User, null=True, on_delete=models.CASCADE, verbose_name='Ссылка на автора')
+    film  = models.ForeignKey(Film, related_name="commented_film", null=True, on_delete=models.CASCADE, verbose_name='Ссылка на фильм')
+    body = models.TextField(verbose_name='Тело комментария')
+    
+    def __str__(self):
+        return self.body
+        # return (self.owner.login + self.film)
+
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
