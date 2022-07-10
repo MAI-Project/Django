@@ -6,6 +6,10 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib import auth
 
+from django.http import StreamingHttpResponse
+from django.shortcuts import render, get_object_or_404
+from .services import open_file
+
 
 def index(request):
     c = Category.objects.filter(maincategory=True)
@@ -39,8 +43,10 @@ def player(request, filmId):
         if _body != "":
             comment = Сomment(owner = request.user, film=film, body=_body)
             comment.save()
-            
-    return render(request, 'main/player.html', {'film': film,"cat_list": p, 'comments': comments, 'isuser': isuser, 'userName': getUserName(request)})
+
+    if film.from_torrent:      
+        return render(request, 'main/player.html', {'film': film,"cat_list": p, 'comments': comments, 'isuser': isuser, 'userName': getUserName(request)})
+    return render(request, 'main/localPayer.html', {'film': film,"cat_list": p, 'comments': comments, 'isuser': isuser, 'userName': getUserName(request)})
 
 
 def getUserName(request):
@@ -50,3 +56,13 @@ def getUserName(request):
     else:
         userName = ''
     return userName
+
+def get_streaming_video(request, pk: int):
+    file, status_code, content_length, content_range = open_file(request, pk)
+    response = StreamingHttpResponse(file, status=status_code, content_type='video/mp4')
+
+    response['Accept-Ranges'] = 'bytes'
+    response['Content-Length'] = str(content_length)
+    response['Cache-Control'] = 'no-cache'
+    response['Content-Range'] = content_range
+    return response
