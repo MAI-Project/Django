@@ -16,7 +16,7 @@ services:
 
   web:
     build: ./web/
-    command: bash -c "python manage.py makemigrations --merge && python manage.py migrate && python manage.py runserver 0.0.0.0:8080"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8080"
     volumes:
       - .:/code
     ports:

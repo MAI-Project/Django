@@ -31,6 +31,7 @@ class Film(models.Model):
     magnet = models.TextField(max_length=1024, null=True, verbose_name='Магнет ссылка')
     # localPath = models.CharField(max_length=255, null=True, verbose_name='Локальный Путь')
     category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, verbose_name='Категория')
+    primary = models.BooleanField(null=True, default=False, verbose_name='По подписке')
 
     def __str__(self):
         return self.name

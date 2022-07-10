@@ -1,4 +1,4 @@
-# from tokenize import Comment
+from curses import flash
 from django.shortcuts import render
 from .models import Film, Category, Сomment
 from django.http import HttpResponse
@@ -9,14 +9,19 @@ from django.contrib import auth
 
 def index(request):
     c = Category.objects.filter(maincategory=True)
-    return render(request, 'main/index.html',{"cat_list": c})
+    return render(request, 'main/index.html',{"cat_list": c, 'userName': getUserName(request)})
 
 
 def genre(request, tag):
     p = Category.objects.filter(maincategory=True)
     c = Category.objects.get(pk=tag)
-    film_list = c.film_set.all()
-    return render(request, 'main/genre.html', {'title': c.name, 'films': film_list,"cat_list": p})
+    film_list = []
+    if request.user.is_authenticated and request.user.subscription.paid:
+        film_list = c.film_set.all()
+    else:
+        film_list = c.film_set.filter(primary = False)
+        
+    return render(request, 'main/genre.html', {'title': c.name, 'films': film_list, "cat_list": p, 'userName': getUserName(request)})
 
 
 def player(request, filmId):
@@ -35,5 +40,13 @@ def player(request, filmId):
             comment = Сomment(owner = request.user, film=film, body=_body)
             comment.save()
             
-    return render(request, 'main/player.html', {'film': film,"cat_list": p, 'comments': comments, 'isuser': isuser })
+    return render(request, 'main/player.html', {'film': film,"cat_list": p, 'comments': comments, 'isuser': isuser, 'userName': getUserName(request)})
 
+
+def getUserName(request):
+    userName = ''
+    if request.user:
+        userName = request.user.username
+    else:
+        userName = ''
+    return userName
