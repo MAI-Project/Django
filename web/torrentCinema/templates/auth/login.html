@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Вход {% endblock %}
+{% block content %} 
+<div class="container">
+    <h2>Вход в систему</h2>
+    <p>{{ error }}</p>
+    <form method="post", action=''>
+        {% csrf_token %}
+
+        <label class="form-label"   for="login"><b>Email</b></label>
+        <input class="form-control" type="text" placeholder="Enter login" name="login"><br>
+
+        <label class="form-label"   for="password"><b>Password</b></label>
+        <input class="form-control" type="text" placeholder="Enter password" name="password"><br><br>
+
+        <button class="btn-primary" type="submit"> Войти </button>
+
+    </form>
+</div>
+{% endblock %}

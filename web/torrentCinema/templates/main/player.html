@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-     <div class="myVideo" id="video">
+    <div class="myVideo" id="video">
         <!-- Include WebTorrent -->
     <script src="https://cdn.jsdelivr.net/npm/webtorrent@latest/webtorrent.min.js"></script>
 
@@ -43,6 +43,41 @@
 
     </script>
     </div>
+    
+    <div class="container">
+    <div>
+        <br><br> <h3 style="color: #bb6829" >Описание фильма</h3>
+            {{film.description}}
+    </div>
+    <br><span style="color: #bb6829" >Рейтинг фильма по мнению каких-то там людей: {{film.rating}}</span><br>
+    {% if film.primary %}
+       <span style="color: #bb6829" > Премиум контент доступный по платной подписке</span>
+    {% else %}
+        <span style="color: #bb6829" >Базовый контент доступный всем</span><br>
+    {% endif %}
+
+    {% if isuser%}
+    <br><h3 style="color: #bb6829" >Оставить Коментарий</h3><br>
+    <form method="post", action=''>
+        {% csrf_token %}
+
+        <label class="form-label"   for="comment"><b>Коментарий</b></label>
+        <input class="" type="text" placeholder="Enter comment" name="comment"></br>
+
+        <button class="btn-primary2" type="submit"> Опубликовать </button>
+
+    </form>
+    {% endif %}
+
+    <br><br><h3 style="color: #bb6829" > Коментарии </h3>
+    {% for comment in comments %}
+    <div class="comment ">
+        <p> Пользователь: {{comment.owner.username }}</p>
+        <p> Коментарий: {{comment.body}} </p>
+    </div>
+        {% endfor %}
+    </div>
+
     <footer class="footer-nongrad">
         <p>© 2022 813Enjoyers team
         </p>

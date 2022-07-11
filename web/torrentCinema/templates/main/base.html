@@ -3,6 +3,8 @@
 <html lang="en">
 <head>
     <link rel="stylesheet" href="{% static 'css/genre-pages.css'%}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/auth.css'%}" type="text/css">
+    <link href="https://vjs.zencdn.net/7.19.2/video-js.css" rel="stylesheet" />
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -31,6 +33,17 @@
                 {% for category in cat_list %}
                 <li class="nav-item"><a href="/genre/{{category.id}}" class="nav-link" aria-current="page" style="color: #bb6829">{{category.name}}</a></li>
                 {% endfor %}
+                {% if userName == '' %}
+                    <li class="nav-item">
+                        <a href="{% url 'login'%}" class="nav-link" aria-current="page" style="color: #bb6829"> login </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'registration'%}" class="nav-link" aria-current="page" style="color: #bb6829"> Registration </a>
+                    </li>
+                    
+                {% else %}
+                    <li class="nav-item"><span class="nav-link" aria-current="page" style="color: #bb6829"> Hi, {{ userName }} </span></li>
+                {% endif %}
             </ul>
         </header>
     </div>

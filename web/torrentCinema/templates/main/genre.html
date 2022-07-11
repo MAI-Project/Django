@@ -16,10 +16,21 @@
                 {% for el in films %}
                     <div class="col" id="filmblock">
                         <div class="card shadow-sm">
-                            <img src="{{ el.imagePath }}" class="d-block w-100" alt="...">
+                            <img src="{{ el.photo_url }}" class="d-block w-100" alt="...">
                             <div class="card-body">
                                 <p class="card-text">
-                                    <font style="vertical-align: inherit;"><font style="vertical-align: inherit;"></font></font><span style="font-size: 30px;">{{ el.name }}</span><br>{{ el.description }} </p>
+                                    <font style="vertical-align: inherit;">
+                                        <font style="vertical-align: inherit;"></font>
+                                    </font>
+                                    <span style="font-size: 30px;">{{ el.name }}</span>
+                                    <br>{{ el.description }} 
+                                    <br> 
+                                    {% if el.primary %}
+                                        Премиум контент
+                                    {% else %}
+                                        Базовый контент
+                                    {% endif %}
+                                </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button name="write" type="button" class="btn btn-sm btn-outline-secondary" onclick="window.location.href='/player/{{ el.id }}'">Смотреть</button>
